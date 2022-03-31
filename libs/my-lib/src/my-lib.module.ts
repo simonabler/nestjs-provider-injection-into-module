@@ -1,7 +1,9 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common';
-import { RealService } from '../../../src/db_provider/real-service.service';
 import { MyLibController } from './controller/my-lib.controller';
-import { MyInjectableAsyncOptions, MyInjectableOptionsFactory } from './interfaces/my-injectable-service.interface';
+import {
+  MyInjectableAsyncOptions,
+  MyInjectableOptionsFactory,
+} from './interfaces/async-options.interface';
 import { INJECTABLE_SERVICE } from './my-lib.constant';
 import { MyLibService } from './my-lib.service';
 
@@ -11,24 +13,13 @@ import { MyLibService } from './my-lib.service';
   exports: [MyLibService],
 })
 export class MyLibModule {
-
   public static registerAsync(
     connectOptions: MyInjectableAsyncOptions,
   ): DynamicModule {
-    const allImports = [
-      ...new Set(
-        [].concat(
-          connectOptions.imports,
-        ),
-      ),
-    ];
-
     return {
       module: MyLibModule,
       imports: connectOptions.imports || [],
-      providers: [
-        this.createConnectAsyncProviders(connectOptions),
-      ],
+      providers: [this.createConnectAsyncProviders(connectOptions)],
     };
   }
 
@@ -50,5 +41,4 @@ export class MyLibModule {
       inject: [options.useExisting],
     };
   }
-
 }

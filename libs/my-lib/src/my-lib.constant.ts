@@ -1,1 +1,1 @@
-export const INJECTABLE_SERVICE="MyInjectableService";
+export const INJECTABLE_SERVICE = 'MyInjectableService';

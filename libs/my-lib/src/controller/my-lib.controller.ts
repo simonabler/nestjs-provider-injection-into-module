@@ -4,14 +4,13 @@ import { INJECTABLE_SERVICE } from '../my-lib.constant';
 
 @Controller('lib')
 export class MyLibController {
+  constructor(
+    @Inject(INJECTABLE_SERVICE)
+    private injectionService: MyInjectableService,
+  ) {}
 
-    constructor(
-        @Inject(INJECTABLE_SERVICE)
-        private injectionService: MyInjectableService
-        ) { }
-
-    @Get()
-    getTest() {
-        return this.injectionService.findAll();
-    }
+  @Get()
+  getTest() {
+    return this.injectionService.findAll();
+  }
 }

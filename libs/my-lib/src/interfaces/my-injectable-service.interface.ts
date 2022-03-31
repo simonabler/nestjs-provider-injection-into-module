@@ -1,22 +1,6 @@
-import { ModuleMetadata, Type } from "@nestjs/common";
+import { User } from '../model/user.model';
 
 export interface MyInjectableService {
-    createEntry()
-    findAll()
-}
-
-
-export interface MyInjectableAsyncOptions
-  extends Pick<ModuleMetadata, 'imports'> {
-  inject?: any[];
-  useExisting?: Type<MyInjectableOptionsFactory>;
-  useFactory?: (
-    ...args: any[]
-  ) => Promise<MyInjectableService> | MyInjectableService;
-}
-
-export interface MyInjectableOptionsFactory {
-    createMyInjectableOptions():
-      | Promise<MyInjectableService>
-      | MyInjectableService;
+  createEntry(userToCreate: User): User;
+  findAll(): Promise<User[]> | User[];
 }
