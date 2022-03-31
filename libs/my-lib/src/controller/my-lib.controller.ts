@@ -1,10 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { MyInjectableService } from '../interfaces/my-injectable-service.interface';
+import { INJECTABLE_SERVICE } from '../my-lib.constant';
 
-@Controller('')
+@Controller('lib')
 export class MyLibController {
 
-    constructor(private injectionService: MyInjectableService) { }
+    constructor(
+        @Inject(INJECTABLE_SERVICE)
+        private injectionService: MyInjectableService
+        ) { }
 
     @Get()
     getTest() {
